@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
+import Link from "next/link";
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
@@ -79,8 +80,10 @@ const Cart = () => {
   const applyPromoCode = () => {
     if (promoCode === "PROMO15") {
       setDiscount(0.15);
+      localStorage.setItem("discount", 0.15);
     } else {
       setDiscount(0);
+      localStorage.removeItem("discount");
     }
   };
 
@@ -173,9 +176,11 @@ const Cart = () => {
                   </div>
                 </>
               )}
-              <Button variant="primary" className="mt-3">
-                Proceder al pago
-              </Button>
+              <Link href="/checkout">
+                <Button variant="primary" className="mt-3">
+                  Proceder al pago
+                </Button>
+              </Link>
             </Card.Body>
           </Card>
         </Col>
